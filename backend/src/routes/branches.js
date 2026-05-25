@@ -9,7 +9,7 @@ const router = express.Router();
 router
   .route("/")
   .get(branchesController.getbranches)
-  .post(branchesController.insertBranches);
+  .post( branchesController.insertBranches);
 
 router
   .route("/:id")

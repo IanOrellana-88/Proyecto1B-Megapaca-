@@ -10,6 +10,7 @@ import logoutRoutes from "./src/routes/logout.js";
 import cors from "cors";
 import recoveryPasswordRoutes from "./src/routes/recoveryPassword.js";
 import providerRoutes from "./src/routes/provider.js";
+import limiter from "./src/middlewares/limiter.js"
 
 //Creo una constante que guarde Express
 const app = express();
@@ -21,6 +22,8 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use(limiter)
 
 app.use(cookieParser());
 
@@ -36,5 +39,6 @@ app.use("/api/login", loginCustomerRoutes);
 app.use("/api/logout", logoutRoutes);
 app.use("/api/recoveryPassword", recoveryPasswordRoutes);
 app.use("/api/providers", providerRoutes);
+
 
 export default app;
