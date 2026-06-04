@@ -43,8 +43,7 @@ employeeController.deleteEmployee = async (req, res) => {
 //ACTUALIZAR
 employeeController.updateEmployee = async (req, res) => {
   //#1- Solicito los nuevos datos
-  const { name, lastName, salary, DUI, phone, email, password, idBranches } =
-    req.body;
+  const { name, lastName, salary, DUI, phone, email, password, idBranches } = req.body;
   //#2- Actualizo
   await employeesModel.findByIdAndUpdate(
     req.params.id,
