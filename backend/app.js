@@ -14,6 +14,8 @@ import limiter from "./src/middlewares/limiter.js"
 import cartRoutes from "./src/routes/cart.js"
 import wompiRoutes from "./src/routes/wompi.js"
 import deliveryDriverRoutes from "./src/routes/deliveryDrivers.js"
+import {validateAuthCookie} from "./src/middlewares/authMiddleware.js"
+
 
 //Creo una constante que guarde Express
 const app = express();
@@ -34,11 +36,11 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
-app.use("/api/branches", branchesRoutes);
-app.use("/api/employees", employeesRoutes);
+app.use("/api/branches",  branchesRoutes);
+app.use("/api/employees", validateAuthCookie(["admin"]), employeesRoutes);
 app.use("/api/customers", customerRoutes);
 app.use("/api/registerCustomer", registerCustomerRoutes);
-app.use("/api/login", loginCustomerRoutes);
+app.use("/api/loginCustomers", loginCustomerRoutes);
 app.use("/api/logout", logoutRoutes);
 app.use("/api/recoveryPassword", recoveryPasswordRoutes);
 app.use("/api/providers", providerRoutes);
